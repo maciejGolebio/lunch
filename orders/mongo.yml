@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+  labels:
+    service: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: mongo
+  template:
+    metadata:
+      labels:
+        service: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:latest
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: username
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mongo-secret
+                key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  type: NodePort
+  ports:
+    - name: "http"
+      port: 27017
+      protocol: TCP
+      targetPort: 27017
+  selector:
+    service: mongo

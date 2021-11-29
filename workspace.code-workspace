@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "./menu"
+		},
+		{
+			"path": "./lunch_utils"
+		},
+		{
+			"path": "./lunch-app"
+		},
+		{
+			"path": "./orders"
+		}
+	],
+	"settings": {}
+}

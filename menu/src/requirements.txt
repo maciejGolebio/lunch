@@ -1,0 +1,6 @@
+file: ./../../lunch_utils
+dependency-injector==4.37.0
+fastapi==0.70.0
+pydantic==1.8.2
+pymongo==3.12.1
+uvicorn
